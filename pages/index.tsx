@@ -1,13 +1,28 @@
-import Link from 'next/link'
-import Layout from '../components/Layout'
+import React, { useEffect } from "react";
+import { useRouter } from "next/dist/client/router";
+import AccessInterface from "../components/AccessInterface";
+import { validateToken } from "./api/userApi";
+import Layout from "../components/common/Layout";
+import styles from "../styles/index.module.scss";
 
-const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
-    <p>
-      <Link href="/about">About</Link>
-    </p>
-  </Layout>
-)
+const HomePage: React.FC = () => {
+  const router = useRouter();
 
-export default IndexPage
+  useEffect(() => {
+    validateToken().then(response => {
+        if (response?.code === 1) {
+            router.push("./dashboard");
+        }
+    });
+  }, []);
+
+  return (
+    <Layout>
+      <div className={styles.accessInterface}>
+        <AccessInterface />
+      </div>
+    </Layout>
+  );
+};
+
+export default HomePage;

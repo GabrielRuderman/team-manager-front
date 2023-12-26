@@ -1,0 +1,15 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    background-color: #e3f2fd;
+    height: 100px;
+}
+
+.contact {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
